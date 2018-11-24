@@ -32,3 +32,4 @@ while True:
     my_survey.store_re(response)  #存储答案
 
 my_survey.show()  #显示调查结果
+#不能回退吗？

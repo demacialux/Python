@@ -8,7 +8,7 @@ class Ship():
         self.ai_settings = ai_settings
 
         #加载飞船图像并获取其外接矩形
-        self.image = pygame.image.load(r'D:\Python\pygame\images\niconi.bmp')  #导入飞船图片，并将表示飞船的surface存入变量
+        self.image = pygame.image.load(r'D:\GitHub\Python\pygame\images\niconi.bmp')  #导入飞船图片，并将表示飞船的surface存入变量
         self.rect = self.image.get_rect()  #获取相应surface的属性rect
         self.screen_rect = screen.get_rect()  
         #将每艘新飞船放在屏幕底部中央
@@ -35,3 +35,7 @@ class Ship():
     def blitme(self):
         """在指定位置绘制飞船"""
         self.screen.blit(self.image,self.rect)
+
+    def center_ship(self):
+        """让飞船在屏幕上居中"""
+        self.center = self.screen_rect.centerx

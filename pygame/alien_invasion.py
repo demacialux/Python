@@ -7,6 +7,7 @@ from ship import Ship  #导入飞船
 from alien import Alien  #导入外星人
 from button import Button  #导入开始按钮
 from scoreboard import Scoreboard  #导入计分
+from music import *  #导入声音
 
 def run_game():
     #初始化python、设置和屏幕对象
@@ -26,6 +27,8 @@ def run_game():
     aliens = Group()  #创建一个外星人编组
 
     gf.create_fleet(ai_settings,screen,ship,aliens)  #创建外星人群
+
+    bg_music()  #背景音乐
 
     #开始游戏的主循环
     while True:

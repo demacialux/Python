@@ -3,6 +3,7 @@ import pygame
 from time import sleep  #用于游戏暂停
 from bullet import Bullet
 from alien import Alien
+from music import *
 
 def check_keydown_events(event,ai_settings,screen,ship,bullets):
     """响应按键"""
@@ -12,6 +13,7 @@ def check_keydown_events(event,ai_settings,screen,ship,bullets):
         ship.moving_left = True
     elif event.key == pygame.K_SPACE:  #空格键发射子弹
         fire_bullet(ai_settings,screen,ship,bullets)
+        laugh_sound()  #发射音效
     elif event.key == pygame.K_q:  #q键退出游戏
         sys.exit()
 

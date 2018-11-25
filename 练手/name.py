@@ -22,3 +22,4 @@ class TestAnonyous(unittest.TestCase):
             self.assertIn(response,self.my_survey.responses)
 
 unittest.main()
+print('12345678')

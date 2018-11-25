@@ -24,7 +24,7 @@ class Settings():
             self.fleet_drop_speed = 10  #外星人下降速度
             self.fleet_direction = 1  #fleet_direction为1表示右移，为-1表示左移 
 
-            self.speedup_scale = 1.2  #以什么样的速度加快游戏节奏
+            self.speedup_scale = 1.1  #以什么样的速度加快游戏节奏
             self.score_scale = 1.5  #外星人点数的提高速度
 
             self.initialize_dynamic_settings()

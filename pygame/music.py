@@ -13,7 +13,7 @@ def bg_music():
 def laugh_sound():
     """发射子弹音效"""
     laugh_sound = pygame.mixer.Sound(r"D:\GitHub\Python\pygame\music\nico.wav")
-    laugh_sound.set_volume(0.5)
+    laugh_sound.set_volume(1)
     laugh_sound.play()
 
 def boom_sound():

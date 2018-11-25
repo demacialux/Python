@@ -29,6 +29,10 @@ def run_game():
     gf.create_fleet(ai_settings,screen,ship,aliens)  #创建外星人群
 
     bg_music()  #背景音乐
+    if pygame.K_y:
+        pygame.mixer.music.pause()
+    if pygame.K_u:
+        pygame.mixer.music.unpause()
     
     #开始游戏的主循环
     while True:

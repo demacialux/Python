@@ -17,6 +17,10 @@ def check_keydown_events(event,ai_settings,screen,ship,bullets):
         laugh_sound()  #发射音效
     elif event.key == pygame.K_q:  #q键退出游戏
         sys.exit()
+    elif event.key == pygame.K_y:  #y键暂停背景音乐
+        pygame.mixer.music.pause()
+    elif event.key == pygame.K_u:  #u键继续背景音乐
+        pygame.mixer.music.unpause()
 
 def check_keyup_events(event,ship):
     """响应松开"""
@@ -110,8 +114,10 @@ def check_bullet_alien_collisions(ai_settings,screen,stats,sb,ship,aliens,bullet
 
         stats.level += 1  #提高等级
         sb.prep_level()  #显示新等级
-
-        create_fleet(ai_settings,screen,ship,aliens)  #新建一群外星人
+        if stats.level < 10:
+            create_fleet(ai_settings,screen,ship,aliens)  #新建一群外星人
+        elif stats.level >= 10:
+            n_create_fleet(ai_settings,screen,ship,aliens)  #新建一群高级外星人
 
 def create_alien(ai_settings,screen,aliens,alien_number,row_number):
     """创建一个外星人并将其放在当前行"""
@@ -142,7 +148,7 @@ def get_number_aliens_x(ai_settings,alien_width):
 
 def get_number_rows(ai_settings,ship_height,alien_height):
     """计算屏幕可容纳多少行外星人"""
-    available_space_y = (ai_settings.screen_height -(3 * alien_height) - ship_height)
+    available_space_y = (ai_settings.screen_height -(4 * alien_height) - ship_height)
     number_rows = int(available_space_y / (2 * alien_height))
     return number_rows
 
@@ -197,8 +203,33 @@ def check_high_score(stats,sb):
         stats.high_score = stats.score
         sb.prep_high_score()
 
+    if pygame.K_q:
         #将最高分写入文件
         high = 'high_score.json'
         high_score = stats.high_score
         with open(high,'w') as f_obj:
             json.dump(high_score,f_obj)
+
+def n_create_fleet(ai_settings,screen,ship,aliens):
+    """创建高级外星人群"""
+    #创建一个外星人，并计算每行可以容纳多少个外星人
+    alien = Alien(ai_settings,screen)
+    number_aliens_x = n_get_number_aliens_x(ai_settings,alien.rect.width)
+    number_rows = n_get_number_rows(ai_settings,ship.rect.height,alien.rect.height)
+
+    #创建外星人群
+    for row_number in range(number_rows):
+        for alien_number in range(number_aliens_x):
+            create_alien(ai_settings,screen,aliens,alien_number,row_number)
+       
+def n_get_number_aliens_x(ai_settings,alien_width):
+    """计算每行可容纳多少个高级外星人"""
+    available_space_x = ai_settings.screen_width - 2 * alien_width
+    number_aliens_x = int(available_space_x / (2 * alien_width))
+    return number_aliens_x
+
+def n_get_number_rows(ai_settings,ship_height,alien_height):
+    """计算屏幕可容纳多少行高级外星人"""
+    available_space_y = (ai_settings.screen_height -(3 * alien_height) - ship_height)
+    number_rows = int(available_space_y / (2 * alien_height))
+    return number_rows

@@ -1,5 +1,6 @@
 import sys  #用于退出游戏
 import pygame
+import json  #存储数据
 from time import sleep  #用于游戏暂停
 from bullet import Bullet
 from alien import Alien
@@ -57,6 +58,7 @@ def check_play_button(ai_settings,screen,stats,sb,play_button,ship,aliens,bullet
 
         create_fleet(ai_settings,screen,ship,aliens)  #创建一群新的外星人
         ship.center_ship()  #让飞船居中
+        
 
 def update_screen(ai_settings,screen,stats,sb,ship,aliens,bullets,play_button):
     """更新屏幕上的图像，并切换到新屏幕"""
@@ -100,6 +102,7 @@ def check_bullet_alien_collisions(ai_settings,screen,stats,sb,ship,aliens,bullet
             stats.score += ai_settings.alien_points * len(aliens)
             sb.prep_score()
         check_high_score(stats,sb)  #检测是否为最高分
+        boom_sound()  #爆炸音效
 
     if len(aliens) == 0:
         bullets.empty()  #删除现有子弹
@@ -133,8 +136,8 @@ def create_fleet(ai_settings,screen,ship,aliens):
        
 def get_number_aliens_x(ai_settings,alien_width):
     """计算每行可容纳多少个外星人"""
-    available_space_x = ai_settings.screen_width - 2 * alien_width
-    number_aliens_x = int(available_space_x / (2 * alien_width))
+    available_space_x = ai_settings.screen_width - 3 * alien_width
+    number_aliens_x = int(available_space_x / (3 * alien_width))
     return number_aliens_x
 
 def get_number_rows(ai_settings,ship_height,alien_height):
@@ -193,3 +196,9 @@ def check_high_score(stats,sb):
     if stats.score > stats.high_score:
         stats.high_score = stats.score
         sb.prep_high_score()
+
+        #将最高分写入文件
+        high = 'high_score.json'
+        high_score = stats.high_score
+        with open(high,'w') as f_obj:
+            json.dump(high_score,f_obj)

@@ -15,7 +15,7 @@ def run_game():
     ai_settings = Settings()  #创建一个实例，并存入变量
     screen = pygame.display.set_mode((ai_settings.screen_width,
         ai_settings.screen_height))  #创建屏幕（长、宽尺寸）
-    pygame.display.set_caption("Alien Invasion")  #把屏幕尺寸值传递到此
+    pygame.display.set_caption("妮可大战喵帕斯")  #把屏幕尺寸值传递到此
 
     play_button = Button(ai_settings,screen,'Play')  #创建play按钮
 
@@ -29,7 +29,7 @@ def run_game():
     gf.create_fleet(ai_settings,screen,ship,aliens)  #创建外星人群
 
     bg_music()  #背景音乐
-
+    
     #开始游戏的主循环
     while True:
         gf.check_events(ai_settings,screen,stats,sb,play_button,ship,aliens,bullets)  #检测按键和鼠标事件

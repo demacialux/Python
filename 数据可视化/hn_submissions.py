@@ -1,5 +1,4 @@
 import requests
-
 from operator import itemgetter
 
 #执行API调用并存储响应

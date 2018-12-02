@@ -19,3 +19,4 @@ for news in  soup.find_all('a',target='_blank'):
         line = news.get('href')
         title_lines = title.strip() +' ' + line
         print(title_lines)
+        
